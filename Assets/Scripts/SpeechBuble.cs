@@ -8,27 +8,27 @@ public class SpeechBuble : MonoBehaviour
     public Text DialogText;
     public bool IsWhite;
     public float Slowdown;
+    public bool IsInUse;
+    public int Index;
 
-    // Start is called before the first frame update
-    void Start()
+    public delegate void SayLineFinished();
+    private SayLineFinished _onSayLineFinished;
+
+    public void InitLine(string text, int index, SayLineFinished onSayLineFinished)
     {
-        if (string.IsNullOrEmpty(Text))
-        {
-            Text = DialogText.text;
-        }
-        if (Slowdown == 0) {
-            Slowdown = 1.0f;
-        }
-
-        SayLine();
+        Slowdown = 1.0f;
+        Text = text;
+        Index = index;
+        _onSayLineFinished = onSayLineFinished;
     }
 
-    void SayLine()
+    public void SayLine()
     {
         SayItService.Instance().WhiteColor = IsWhite;
         SayItService.Instance().SayLine(DialogText, Text, () =>
         {
-            Debug.Log("S-a terminat!");
+            IsInUse = false;
+            _onSayLineFinished();
         }, Slowdown);
     }
 }

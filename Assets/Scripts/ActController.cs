@@ -63,7 +63,7 @@ public class ActController : MonoBehaviour
         {
             CurrentAct.GameObject.SetActive(false);
         }
-        if (startAtAct != null)
+        if (string.IsNullOrEmpty(startAtAct) == false)
         {
             CurrentAct = PrefabManager.Instance().GetActObject(startAtAct);
         }
