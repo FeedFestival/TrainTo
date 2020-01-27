@@ -33,12 +33,18 @@ public class HelloAct_Action_1 : MonoBehaviour, IAction
 
     void PlayConversation()
     {
-        DialogueController.Instance.SayLine(_lines[0], true, true, OldManReply);
+        DialogueController.Instance.Show(_lines[0], true, OldManReply);
+        DialogueController.Instance.SayLines();
     }
 
     void OldManReply()
     {
-        DialogueController.Instance.SayLine(_lines[1], true);
+        DialogueController.Instance.Show(_lines[1], true, WomenSaysSomethingElse);
+        DialogueController.Instance.SayLines();
+    }
+
+    void WomenSaysSomethingElse() {
+        DialogueController.Instance.Hide();
     }
 
     IEnumerator WaitABit()
@@ -81,7 +87,7 @@ rotationX = 0f, rotationY = 0f, rotationZ = 0f, childWidth = 194.4f, childHeight
                     }
                 },
                 Sentences = new string[1] {
-                    "I'm heading to Constanta City"
+                    "I'm heading \nto Constanta \nCity"
                 }
             }
         };

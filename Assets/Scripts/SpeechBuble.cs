@@ -32,7 +32,8 @@ public class SpeechBuble : MonoBehaviour
 
     public void SayLine()
     {
-        if (_sayLineCo != null) {
+        if (_sayLineCo != null)
+        {
             StopCoroutine(_sayLineCo);
             _sayLineCo = null;
         }
@@ -66,8 +67,28 @@ public class SpeechBuble : MonoBehaviour
             1f,
             GameHiddenOptions.Instance.TimeToLoadDialogueBoxes
         ).id;
-        LeanTween.descr(_animationId.Value).setEase(LeanTweenType.linear);
+        LeanTween.descr(_animationId.Value).setEase(LeanTweenType.easeOutSine);
     }
 
-
+    public void SetDisabled()
+    {
+        if (gameObject.activeSelf == false)
+        {
+            return;
+        }
+        if (_animationId.HasValue)
+        {
+            LeanTween.cancel(_animationId.Value);
+            _animationId = null;
+        }
+        _animationId = LeanTween.alpha(
+            _image.GetComponent<RectTransform>(),
+            0f,
+            GameHiddenOptions.Instance.TimeToLoadDialogueBoxes
+        ).id;
+        LeanTween.descr(_animationId.Value).setEase(LeanTweenType.easeInQuart);
+        LeanTween.descr(_animationId.Value).setOnComplete(() => {
+            gameObject.SetActive(false);
+        });
+    }
 }

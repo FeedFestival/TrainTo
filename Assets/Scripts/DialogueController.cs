@@ -33,32 +33,38 @@ public class DialogueController : MonoBehaviour
     private IEnumerator _startSayLine;
     private SayLineFinished _onSayLinesFinished;
 
-    public void Show()
-    {
-
-    }
-
-    internal void SayLine(Line line = null, bool initial = false, bool resetIndex = false, SayLineFinished onSayLinesFinished = null)
+    public void Show(Line line = null, bool initial = false, SayLineFinished onSayLinesFinished = null)
     {
         if (initial)
         {
-            _dialogBoxIndex = 0;
-            _currentLine = line;
-            _onSayLinesFinished = onSayLinesFinished;
-
-            if (resetIndex)
-            {
-                _index = 0;
-            }
-            _sentenceIndex = 0;
+            Reset(line, onSayLinesFinished);
             foreach (var dialogBox in line.DialogBoxes)
             {
                 CreateDialogueBoxes(dialogBox);
-                _index++;
                 _sentenceIndex++;
             }
         }
+    }
 
+    public void Hide()
+    {
+        Reset();
+        foreach (var speechBuble in _speechBublePool)
+        {
+            speechBuble.SetDisabled();
+        }
+    }
+
+    private void Reset(Line line = null, SayLineFinished onSayLinesFinished = null)
+    {
+        _currentLine = line;
+        _dialogBoxIndex = 0;
+        _onSayLinesFinished = onSayLinesFinished;
+        _sentenceIndex = 0;
+    }
+
+    internal void SayLines()
+    {
         if (_startSayLine != null)
         {
             StopCoroutine(_startSayLine);
@@ -81,10 +87,13 @@ public class DialogueController : MonoBehaviour
         if (_dialogBoxIndex >= _currentLine.DialogBoxes.Length)
         {
             _currentLine = null;
-            _onSayLinesFinished();
+            if (_onSayLinesFinished != null)
+            {
+                _onSayLinesFinished();
+            }
             return;
         }
-        SayLine();
+        SayLines();
     }
 
     private void InitDialoguePrefabs()
@@ -142,7 +151,7 @@ public class DialogueController : MonoBehaviour
         var crT = rT.GetChild(0).GetComponent<RectTransform>();
         crT.sizeDelta = new Vector2(dialogBox.childWidth, dialogBox.childHeight);
 
-        go.GetComponent<SpeechBuble>().InitLine(_currentLine.Sentences[_sentenceIndex], _index, SayLineFinished);
+        go.GetComponent<SpeechBuble>().InitLine(_currentLine.Sentences[_sentenceIndex], dialogBox.Index, SayLineFinished);
         go.GetComponent<SpeechBuble>().SetActive();
     }
 }
