@@ -734,22 +734,22 @@ PrefabInstance:
     - target: {fileID: 4521391081879404998, guid: fc7bd5d3ab5e5064494092e8c67a66e5,
         type: 3}
       propertyPath: m_text
-      value: "I'm heading \nto Constanta City"
+      value: "I'm heading \nto Constanta \nCity"
       objectReference: {fileID: 0}
     - target: {fileID: 4521391081879404998, guid: fc7bd5d3ab5e5064494092e8c67a66e5,
         type: 3}
       propertyPath: m_firstOverflowCharacterIndex
-      value: 26
+      value: 27
       objectReference: {fileID: 0}
     - target: {fileID: 4521391081879404998, guid: fc7bd5d3ab5e5064494092e8c67a66e5,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 30
+      value: 31
       objectReference: {fileID: 0}
     - target: {fileID: 4521391081879404998, guid: fc7bd5d3ab5e5064494092e8c67a66e5,
         type: 3}
       propertyPath: m_textInfo.spaceCount
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4521391081879404998, guid: fc7bd5d3ab5e5064494092e8c67a66e5,
         type: 3}
