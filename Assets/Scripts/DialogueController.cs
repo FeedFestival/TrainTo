@@ -23,34 +23,54 @@ public class DialogueController : MonoBehaviour
 
     [Header("DialoguePrefabs")]
     public GameObject dbs;
-
     private Dictionary<string, GameObject> _dialoguePrefabs;
     private List<SpeechBuble> _speechBublePool;
     public Text CurrentDialogueBox;
-
     private Line _currentLine;
     private int _dialogBoxIndex;
+    private int _index;
+    private int _sentenceIndex;
+    private IEnumerator _startSayLine;
+    private SayLineFinished _onSayLinesFinished;
 
     public void Show()
     {
 
     }
 
-    internal void SayLine(Line line = null, bool initial = false)
+    internal void SayLine(Line line = null, bool initial = false, bool resetIndex = false, SayLineFinished onSayLinesFinished = null)
     {
         if (initial)
         {
             _dialogBoxIndex = 0;
             _currentLine = line;
+            _onSayLinesFinished = onSayLinesFinished;
 
-            var index = 0;
+            if (resetIndex)
+            {
+                _index = 0;
+            }
+            _sentenceIndex = 0;
             foreach (var dialogBox in line.DialogBoxes)
             {
-                CreateDialogueBoxes(dialogBox, index);
-                index++;
+                CreateDialogueBoxes(dialogBox);
+                _index++;
+                _sentenceIndex++;
             }
         }
 
+        if (_startSayLine != null)
+        {
+            StopCoroutine(_startSayLine);
+            _startSayLine = null;
+        }
+        _startSayLine = StartSayLine();
+        StartCoroutine(_startSayLine);
+    }
+
+    IEnumerator StartSayLine()
+    {
+        yield return new WaitForSeconds(GameHiddenOptions.Instance.TimeBeforeSayLine);
         var speechBuble = GetDialoguePrefab();
         speechBuble.SayLine();
     }
@@ -58,8 +78,10 @@ public class DialogueController : MonoBehaviour
     void SayLineFinished()
     {
         _dialogBoxIndex++;
-        if (_dialogBoxIndex >= _currentLine.DialogBoxes.Length) {
+        if (_dialogBoxIndex >= _currentLine.DialogBoxes.Length)
+        {
             _currentLine = null;
+            _onSayLinesFinished();
             return;
         }
         SayLine();
@@ -79,11 +101,11 @@ public class DialogueController : MonoBehaviour
         return _speechBublePool.FirstOrDefault(s =>
             s.gameObject.name == dialogBox.DialogBoxType.ToString()
             && s.gameObject.activeSelf == true
-            && s.Index == _dialogBoxIndex
+            && s.Index == dialogBox.Index
             );
     }
 
-    void CreateDialogueBoxes(DialogBox dialogBox, int index)
+    void CreateDialogueBoxes(DialogBox dialogBox)
     {
         GameObject go = null;
         string name = dialogBox.DialogBoxType.ToString();
@@ -120,7 +142,7 @@ public class DialogueController : MonoBehaviour
         var crT = rT.GetChild(0).GetComponent<RectTransform>();
         crT.sizeDelta = new Vector2(dialogBox.childWidth, dialogBox.childHeight);
 
-        go.GetComponent<SpeechBuble>().InitLine(_currentLine.Sentences[index], index, SayLineFinished);
-        go.SetActive(true);
+        go.GetComponent<SpeechBuble>().InitLine(_currentLine.Sentences[_sentenceIndex], _index, SayLineFinished);
+        go.GetComponent<SpeechBuble>().SetActive();
     }
 }

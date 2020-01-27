@@ -38,10 +38,10 @@ public class SayItService : MonoBehaviour
         _onLineEnd = onLineEnd;
     }
 
-    public void SayLine(TextMeshProUGUI dialogText, string line, OnLineEnd onLineEnd, float slowdown = 1)
+    public void SayLine(TextMeshProUGUI dialogText, OnLineEnd onLineEnd, float slowdown = 1)
     {
         SetLineOptions(dialogText, onLineEnd);
-        SayLine(line, slowdown);
+        SayLine(dialogText.text, slowdown);
     }
 
     int _lineIndex;

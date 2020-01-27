@@ -21,16 +21,18 @@ public class GameHiddenOptions : MonoBehaviour
     public bool InstantDebug;
     public string ServerURL = "http://127.0.0.1:8080";
 
-    //[Header("Execution Timers")]
-    //public float TimeBeforeSessionCreation = 0.2f;
-    //public float TimeBeforeGameStart = 0.1f;
+    [Header("Execution Timers")]
+    public readonly float TimeToLoadDialogueBoxes = 0.2f;
+    public readonly float TimeBeforeReadingLine = 0.1f;
+    public readonly float TimeBeforeSayLine = 0.2f;
 
     [Header("Base Colors")]
     public Color32 BlackColor;
     public Color32 WhiteColor;
     public Color32 RedColor;
     public Color32 LightBlueColor;
-    public Color32 FullTransparentColor;
+    public Color32 BlackTransparentColor;
+    public Color32 WhiteTransparentColor;
 
     // [Header("Prefabs")]
     

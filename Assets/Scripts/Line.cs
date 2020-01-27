@@ -10,6 +10,7 @@ public class Line
 
 public class DialogBox
 {
+    public int Index;
     public DialogBoxType DialogBoxType;
     public float posX;
     public float posY;

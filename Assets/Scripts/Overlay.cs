@@ -21,7 +21,7 @@ public class Overlay : MonoBehaviour
     {
         if (overlayTransition == OverlayTransition.Transparent)
         {
-            _panel.color = GameHiddenOptions.Instance.FullTransparentColor;
+            _panel.color = GameHiddenOptions.Instance.BlackTransparentColor;
         }
         else
         {
@@ -46,12 +46,12 @@ public class Overlay : MonoBehaviour
         _overlayTransition = overlayTransition;
         _time = overlayTransition == OverlayTransition.Complete ? (time / 2) : time;
 
-        var fromColor = GameHiddenOptions.Instance.FullTransparentColor;
+        var fromColor = GameHiddenOptions.Instance.BlackTransparentColor;
         var toColor = GameHiddenOptions.Instance.BlackColor;
         if (overlayTransition == OverlayTransition.Black)
         {
             fromColor = GameHiddenOptions.Instance.BlackColor;
-            toColor = GameHiddenOptions.Instance.FullTransparentColor;
+            toColor = GameHiddenOptions.Instance.BlackTransparentColor;
         }
 
         _panel.color = fromColor;

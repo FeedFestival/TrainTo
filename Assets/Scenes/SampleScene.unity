@@ -447,7 +447,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 18.299805, y: -5.3999023}
+  m_AnchoredPosition: {x: 18, y: -5.5}
   m_SizeDelta: {x: 118.4, y: 79.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &491328874
@@ -654,22 +654,22 @@ PrefabInstance:
     - target: {fileID: 1953359787499410447, guid: fc7bd5d3ab5e5064494092e8c67a66e5,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 381
+      value: 580.68
       objectReference: {fileID: 0}
     - target: {fileID: 1953359787499410447, guid: fc7bd5d3ab5e5064494092e8c67a66e5,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 377.55
+      value: 401
       objectReference: {fileID: 0}
     - target: {fileID: 1953359787499410447, guid: fc7bd5d3ab5e5064494092e8c67a66e5,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 115.7
+      value: 268.2
       objectReference: {fileID: 0}
     - target: {fileID: 1953359787499410447, guid: fc7bd5d3ab5e5064494092e8c67a66e5,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 105.3
+      value: 227.6
       objectReference: {fileID: 0}
     - target: {fileID: 1953359787499410447, guid: fc7bd5d3ab5e5064494092e8c67a66e5,
         type: 3}
@@ -720,6 +720,46 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7984459474967922252, guid: fc7bd5d3ab5e5064494092e8c67a66e5,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 194.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1953359787499410449, guid: fc7bd5d3ab5e5064494092e8c67a66e5,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4521391081879404998, guid: fc7bd5d3ab5e5064494092e8c67a66e5,
+        type: 3}
+      propertyPath: m_text
+      value: "I'm heading \nto Constanta City"
+      objectReference: {fileID: 0}
+    - target: {fileID: 4521391081879404998, guid: fc7bd5d3ab5e5064494092e8c67a66e5,
+        type: 3}
+      propertyPath: m_firstOverflowCharacterIndex
+      value: 26
+      objectReference: {fileID: 0}
+    - target: {fileID: 4521391081879404998, guid: fc7bd5d3ab5e5064494092e8c67a66e5,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4521391081879404998, guid: fc7bd5d3ab5e5064494092e8c67a66e5,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4521391081879404998, guid: fc7bd5d3ab5e5064494092e8c67a66e5,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4521391081879404998, guid: fc7bd5d3ab5e5064494092e8c67a66e5,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc7bd5d3ab5e5064494092e8c67a66e5, type: 3}
@@ -774,7 +814,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 243bdfd0922167c4694bad744114595a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Text: 
   DialogText: {fileID: 0}
   IsWhite: 0
   Slowdown: 0
@@ -1210,7 +1249,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 302.7, y: 309.1}
+  m_AnchoredPosition: {x: 303, y: 309}
   m_SizeDelta: {x: 373, y: 307.09}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1449902848
@@ -1263,7 +1302,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 243bdfd0922167c4694bad744114595a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Text: 
   DialogText: {fileID: 0}
   IsWhite: 0
   Slowdown: 0
@@ -1320,8 +1358,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 243bdfd0922167c4694bad744114595a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Text: Ana are mere. \nSi I le da lui Ionel care ionel le ia si, \nsi le baga in
-    cur.
   DialogText: {fileID: 0}
   IsWhite: 1
   Slowdown: 0
@@ -1422,9 +1458,12 @@ MonoBehaviour:
   LightBlueColor:
     serializedVersion: 2
     rgba: 0
-  FullTransparentColor:
+  BlackTransparentColor:
     serializedVersion: 2
     rgba: 0
+  WhiteTransparentColor:
+    serializedVersion: 2
+    rgba: 16777215
   CanvasScaler: {fileID: 0}
 --- !u!1 &1689508528
 GameObject:
@@ -1462,7 +1501,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 745.23535, y: -300}
+  m_AnchoredPosition: {x: 745, y: -300}
   m_SizeDelta: {x: 642.86273, y: 600}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1689508530
@@ -1587,7 +1626,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 294.49023, y: -300}
+  m_AnchoredPosition: {x: 294.5, y: -300}
   m_SizeDelta: {x: 258.6275, y: 600}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1692315580
@@ -1915,7 +1954,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 82.58789, y: -300}
+  m_AnchoredPosition: {x: 82.5, y: -300}
   m_SizeDelta: {x: 165.1765, y: 600}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2002384754
