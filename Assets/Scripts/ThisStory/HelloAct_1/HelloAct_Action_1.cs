@@ -57,13 +57,13 @@ public class HelloAct_Action_1 : MonoBehaviour, IAction
                         DialogBoxType = DialogBoxType.dbs,
 posX = 381f, posY = 377.55f, posZ = 0f, width = 115.7f, height = 105.3f, sizeX = 1f, sizeY = 1f, sizeZ = 1f,
 anchorsMinX = 0f, anchorsMinY = 0f, anchorsMaxX = 0f, anchorsMaxY = 0f, pivotX = 0f, pivotY = 0f, 
-rotationX = 0f, rotationY = 0f, rotationZ = 0f, childWidth = 70.9f, childHeight = 28.3f
+rotationX = 0f, rotationY = 0f, rotationZ = 0f, childWidth = 72.12f, childHeight = 50f
                     },
                     new DialogBox() {
                         DialogBoxType = DialogBoxType.dbs,
-posX = 311.68f, posY = 417.9f, posZ = 0f, width = 143.4f, height = 156f, sizeX = 1f, sizeY = 1f, sizeZ = 1f,
+posX = 303f, posY = 428f, posZ = 0f, width = 235.8f, height = 201.9f, sizeX = 1f, sizeY = 1f, sizeZ = 1f,
 anchorsMinX = 0f, anchorsMinY = 0f, anchorsMaxX = 0f, anchorsMaxY = 0f, pivotX = 0f, pivotY = 0f, 
-rotationX = 0f, rotationY = 0f, rotationZ = 0f, childWidth = 86.3f, childHeight = 58.3f
+rotationX = 0f, rotationY = 0f, rotationZ = 0f, childWidth = 157.7f, childHeight = 85.7f
                     }
                 },
                 Sentences = new string[2] {

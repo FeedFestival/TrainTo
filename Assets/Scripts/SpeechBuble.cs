@@ -1,11 +1,12 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class SpeechBuble : MonoBehaviour
 {
     // private string Text = "Ana are mere. \nSi I le da lui Ionel care ionel le ia si, \nsi le baga in cur.";
     public string Text;
-    public Text DialogText;
+    public TextMeshProUGUI DialogText;
     public bool IsWhite;
     public float Slowdown;
     public bool IsInUse;
@@ -18,6 +19,7 @@ public class SpeechBuble : MonoBehaviour
     {
         Slowdown = 1.0f;
         Text = text;
+        DialogText.text = Text;
         Index = index;
         _onSayLineFinished = onSayLineFinished;
     }
