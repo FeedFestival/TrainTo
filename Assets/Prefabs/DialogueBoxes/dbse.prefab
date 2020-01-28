@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &660408118807261245
+--- !u!1 &5560187350614190154
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,9 +8,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7984459474967922252}
-  - component: {fileID: 1218397113391565824}
-  - component: {fileID: 4521391081879404998}
+  - component: {fileID: 3084265175541866043}
+  - component: {fileID: 6119091140984575095}
+  - component: {fileID: 8844164198917888433}
   m_Layer: 5
   m_Name: _text
   m_TagString: Untagged
@@ -18,40 +18,40 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &7984459474967922252
+--- !u!224 &3084265175541866043
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 660408118807261245}
+  m_GameObject: {fileID: 5560187350614190154}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1953359787499410447}
+  m_Father: {fileID: 6852305037182340216}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 72.12, y: 50}
+  m_SizeDelta: {x: 194.4, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &1218397113391565824
+--- !u!222 &6119091140984575095
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 660408118807261245}
+  m_GameObject: {fileID: 5560187350614190154}
   m_CullTransparentMesh: 0
---- !u!114 &4521391081879404998
+--- !u!114 &8844164198917888433
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 660408118807261245}
+  m_GameObject: {fileID: 5560187350614190154}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
@@ -65,7 +65,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: Hello
+  m_text: "I'm heading \nto Constanta \nCity"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9cfd016784e1c4d47af965c7cfb7d53e, type: 2}
   m_sharedMaterial: {fileID: 2352716320817093779, guid: 9cfd016784e1c4d47af965c7cfb7d53e,
@@ -111,7 +111,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 27
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -134,13 +134,13 @@ MonoBehaviour:
   m_pageToDisplay: 1
   m_margin: {x: 0, y: 0, z: 0.000007528103, w: 0}
   m_textInfo:
-    textComponent: {fileID: 4521391081879404998}
-    characterCount: 5
+    textComponent: {fileID: 8844164198917888433}
+    characterCount: 31
     spriteCount: 0
-    spaceCount: 0
-    wordCount: 1
+    spaceCount: 6
+    wordCount: 5
     linkCount: 0
-    lineCount: 1
+    lineCount: 3
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -158,7 +158,7 @@ MonoBehaviour:
   - {fileID: 0}
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!1 &1953359787499410446
+--- !u!1 &6852305037182340217
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -166,85 +166,85 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1953359787499410447}
-  - component: {fileID: 1953359787499410450}
-  - component: {fileID: 1953359787499410448}
-  - component: {fileID: 1953359787499410451}
-  - component: {fileID: 1953359787499410449}
-  - component: {fileID: 1099921744}
+  - component: {fileID: 6852305037182340216}
+  - component: {fileID: 6852305037182340197}
+  - component: {fileID: 6852305037182340199}
+  - component: {fileID: 6852305037182340196}
+  - component: {fileID: 6852305037182340198}
+  - component: {fileID: 4901039273181946151}
   m_Layer: 5
-  m_Name: dbs
+  m_Name: dbse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &1953359787499410447
+--- !u!224 &6852305037182340216
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1953359787499410446}
+  m_GameObject: {fileID: 6852305037182340217}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 7984459474967922252}
+  - {fileID: 3084265175541866043}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 137, y: 528.8}
-  m_SizeDelta: {x: 150, y: 134.4}
+  m_AnchoredPosition: {x: 555.23, y: 401}
+  m_SizeDelta: {x: 258.42, y: 215.09}
   m_Pivot: {x: 0, y: 0}
---- !u!222 &1953359787499410450
+--- !u!222 &6852305037182340197
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1953359787499410446}
+  m_GameObject: {fileID: 6852305037182340217}
   m_CullTransparentMesh: 0
---- !u!114 &1953359787499410448
+--- !u!114 &6852305037182340199
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1953359787499410446}
+  m_GameObject: {fileID: 6852305037182340217}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 243bdfd0922167c4694bad744114595a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DialogText: {fileID: 4521391081879404998}
+  DialogText: {fileID: 8844164198917888433}
   IsWhite: 0
   Slowdown: 0
   IsInUse: 0
   IsConnector: 0
   Index: 0
---- !u!114 &1953359787499410451
+--- !u!114 &6852305037182340196
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1953359787499410446}
+  m_GameObject: {fileID: 6852305037182340217}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4766a838941af444fae49a7f17f53c52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   HasChildren: 1
---- !u!114 &1953359787499410449
+--- !u!114 &6852305037182340198
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1953359787499410446}
+  m_GameObject: {fileID: 6852305037182340217}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
@@ -258,7 +258,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 2cc024a89049fe440bfad54fe9e37d97, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 145260d88237b714d99b52092dfa0915, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -268,13 +268,13 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1099921744
+--- !u!114 &4901039273181946151
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1953359787499410446}
+  m_GameObject: {fileID: 6852305037182340217}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}

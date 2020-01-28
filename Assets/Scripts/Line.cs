@@ -5,6 +5,7 @@ using UnityEngine;
 public class Line
 {
     public DialogBox[] DialogBoxes;
+    public DialogBox[] Connectors;
     public string[] Sentences;
 }
 
@@ -43,5 +44,9 @@ public class DialogBox
 
 public enum DialogBoxType
 {
-    dbs
+    dbs,
+    dbse,
+    dbsr,
+    dbxs,
+    connector
 }

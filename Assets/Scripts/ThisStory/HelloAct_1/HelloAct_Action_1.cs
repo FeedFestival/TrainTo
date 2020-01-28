@@ -22,7 +22,7 @@ public class HelloAct_Action_1 : MonoBehaviour, IAction
 
     void IAction.ContinueAction()
     {
-        _onFinish();
+        WomenSaysSomethingElse();
     }
     //---------------------------------------------------------------------------------------
     #endregion
@@ -39,11 +39,17 @@ public class HelloAct_Action_1 : MonoBehaviour, IAction
 
     void OldManReply()
     {
-        DialogueController.Instance.Show(_lines[1], true, WomenSaysSomethingElse);
+        DialogueController.Instance.Show(_lines[1], true, RequestContinue);
         DialogueController.Instance.SayLines();
     }
 
-    void WomenSaysSomethingElse() {
+    void RequestContinue()
+    {
+        ActController.Instance.RequestContinue();
+    }
+
+    void WomenSaysSomethingElse()
+    {
         DialogueController.Instance.Hide();
     }
 
@@ -60,16 +66,24 @@ public class HelloAct_Action_1 : MonoBehaviour, IAction
             new Line() {
                 DialogBoxes = new DialogBox[2] {
                     new DialogBox() {
-                        DialogBoxType = DialogBoxType.dbs,
-posX = 381f, posY = 377.55f, posZ = 0f, width = 115.7f, height = 105.3f, sizeX = 1f, sizeY = 1f, sizeZ = 1f,
-anchorsMinX = 0f, anchorsMinY = 0f, anchorsMaxX = 0f, anchorsMaxY = 0f, pivotX = 0f, pivotY = 0f,
-rotationX = 0f, rotationY = 0f, rotationZ = 0f, childWidth = 72.12f, childHeight = 50f
+                        DialogBoxType = DialogBoxType.dbxs,
+posX = 562.6f, posY = 801.7f, posZ = 0f, width = 128.7f, height = 116f, sizeX = 1f, sizeY = 1f, sizeZ = 1f,
+anchorsMinX = 0f, anchorsMinY = 0f, anchorsMaxX = 0f, anchorsMaxY = 0f, pivotX = 0f, pivotY = 0f, 
+rotationX = 0f, rotationY = 0f, rotationZ = 0f , childWidth = 72.12f, childHeight = 50f
                     },
                     new DialogBox() {
-                        DialogBoxType = DialogBoxType.dbs,
-posX = 303f, posY = 428f, posZ = 0f, width = 235.8f, height = 201.9f, sizeX = 1f, sizeY = 1f, sizeZ = 1f,
+                        DialogBoxType = DialogBoxType.dbse,
+posX = 427f, posY = 860f, posZ = 0f, width = 235.8f, height = 201.9f, sizeX = 1f, sizeY = 1f, sizeZ = 1f,
 anchorsMinX = 0f, anchorsMinY = 0f, anchorsMaxX = 0f, anchorsMaxY = 0f, pivotX = 0f, pivotY = 0f,
-rotationX = 0f, rotationY = 0f, rotationZ = 0f, childWidth = 157.7f, childHeight = 85.7f
+rotationX = 0f, rotationY = 0f, rotationZ = 0f , childWidth = 157.7f, childHeight = 85.7f
+                    }
+                },
+                Connectors = new DialogBox[1] {
+                    new DialogBox() {
+                        DialogBoxType = DialogBoxType.connector,
+posX = 610.1013f, posY = 874.0718f, posZ = 0f, width = 37.51f, height = 39.75f, sizeX = 1f, sizeY = 1f, sizeZ = 1f,
+anchorsMinX = 0f, anchorsMinY = 0f, anchorsMaxX = 0f, anchorsMaxY = 0f, pivotX = 0f, pivotY = 0f,
+rotationX = 0f, rotationY = 0f, rotationZ = 55.17437f
                     }
                 },
                 Sentences = new string[2] {
@@ -80,10 +94,10 @@ rotationX = 0f, rotationY = 0f, rotationZ = 0f, childWidth = 157.7f, childHeight
             new Line() {
                 DialogBoxes = new DialogBox[1] {
                     new DialogBox() {
-                        DialogBoxType = DialogBoxType.dbs,
-posX = 580.68f, posY = 401f, posZ = 0f, width = 268.2f, height = 227.6f, sizeX = 1f, sizeY = 1f, sizeZ = 1f,
-anchorsMinX = 0f, anchorsMinY = 0f, anchorsMaxX = 0f, anchorsMaxY = 0f, pivotX = 0f, pivotY = 0f, 
-rotationX = 0f, rotationY = 0f, rotationZ = 0f, childWidth = 194.4f, childHeight = 50f
+                        DialogBoxType = DialogBoxType.dbsr,
+posX = 1204f, posY = 864.91f, posZ = 0f, width = 258.42f, height = 215.09f, sizeX = 1f, sizeY = 1f, sizeZ = 1f,
+anchorsMinX = 0f, anchorsMinY = 0f, anchorsMaxX = 0f, anchorsMaxY = 0f, pivotX = 0f, pivotY = 0f,
+rotationX = 0f, rotationY = 0f, rotationZ = 0f , childWidth = 194.4f, childHeight = 50f
                     }
                 },
                 Sentences = new string[1] {
@@ -93,8 +107,10 @@ rotationX = 0f, rotationY = 0f, rotationZ = 0f, childWidth = 194.4f, childHeight
         };
 
         var index = 0;
-        _lines.ForEach(l => {
-            for (var i = 0; i < l.DialogBoxes.Length; i++) {
+        _lines.ForEach(l =>
+        {
+            for (var i = 0; i < l.DialogBoxes.Length; i++)
+            {
                 l.DialogBoxes[i].Index = index;
                 index++;
             }

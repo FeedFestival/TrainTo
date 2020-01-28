@@ -20,11 +20,9 @@ public class DialogueController : MonoBehaviour
     }
 
     public Transform DialogueBoxesParent;
-
-    [Header("DialoguePrefabs")]
-    public GameObject dbs;
     private Dictionary<string, GameObject> _dialoguePrefabs;
     private List<SpeechBuble> _speechBublePool;
+    private List<SpeechBuble> _connectorPool;
     public Text CurrentDialogueBox;
     private Line _currentLine;
     private int _dialogBoxIndex;
@@ -32,6 +30,27 @@ public class DialogueController : MonoBehaviour
     private int _sentenceIndex;
     private IEnumerator _startSayLine;
     private SayLineFinished _onSayLinesFinished;
+
+    [Header("DialoguePrefabs")]
+    public GameObject dbs;
+    public GameObject dbsr;
+    public GameObject dbse;
+    public GameObject dbxs;
+    public GameObject connector;
+
+    //-------------------------------------
+
+    private void InitDialoguePrefabs()
+    {
+        _dialoguePrefabs = new Dictionary<string, GameObject>()
+        {
+            { "dbs", dbs },
+            { "dbsr", dbsr },
+            { "dbse", dbse },
+            { "dbxs", dbxs },
+            { "connector", connector }
+        };
+    }
 
     public void Show(Line line = null, bool initial = false, SayLineFinished onSayLinesFinished = null)
     {
@@ -43,6 +62,13 @@ public class DialogueController : MonoBehaviour
                 CreateDialogueBoxes(dialogBox);
                 _sentenceIndex++;
             }
+            if (line.Connectors != null)
+            {
+                foreach (var conn in line.Connectors)
+                {
+                    CreateConnector(conn);
+                }
+            }
         }
     }
 
@@ -52,6 +78,10 @@ public class DialogueController : MonoBehaviour
         foreach (var speechBuble in _speechBublePool)
         {
             speechBuble.SetDisabled();
+        }
+        foreach (var connector in _connectorPool)
+        {
+            connector.SetDisabled();
         }
     }
 
@@ -96,14 +126,6 @@ public class DialogueController : MonoBehaviour
         SayLines();
     }
 
-    private void InitDialoguePrefabs()
-    {
-        _dialoguePrefabs = new Dictionary<string, GameObject>()
-        {
-            { "dbs", dbs }
-        };
-    }
-
     private SpeechBuble GetDialoguePrefab()
     {
         DialogBox dialogBox = _currentLine.DialogBoxes[_dialogBoxIndex];
@@ -116,28 +138,50 @@ public class DialogueController : MonoBehaviour
 
     void CreateDialogueBoxes(DialogBox dialogBox)
     {
-        GameObject go = null;
+        GameObject go = GetPoolGo(dialogBox, ref _speechBublePool);
+
+        SetProperties(ref go, ref dialogBox, true);
+
+        go.GetComponent<SpeechBuble>().InitLine(_currentLine.Sentences[_sentenceIndex], dialogBox.Index, SayLineFinished);
+        go.GetComponent<SpeechBuble>().SetActive();
+    }
+
+    void CreateConnector(DialogBox connector)
+    {
+        GameObject go = GetPoolGo(connector, ref _connectorPool);
+
+        SetProperties(ref go, ref connector);
+        go.GetComponent<SpeechBuble>().SetActive();
+    }
+
+    private GameObject GetPoolGo(DialogBox dialogBox, ref List<SpeechBuble> pool)
+    {
         string name = dialogBox.DialogBoxType.ToString();
         if (_dialoguePrefabs.ContainsKey(name))
         {
-            if (_speechBublePool == null)
+            if (pool == null)
             {
-                _speechBublePool = new List<SpeechBuble>();
+                pool = new List<SpeechBuble>();
             }
-            var existingGo = _speechBublePool.FirstOrDefault(s => s.gameObject.name == name && s.gameObject.activeSelf == false);
+            var existingGo = pool.FirstOrDefault(s => s.gameObject.name == name && s.gameObject.activeSelf == false);
             if (existingGo != null)
             {
-                go = existingGo.gameObject;
+                return existingGo.gameObject;
             }
             else
             {
-                go = GameHiddenOptions.Instance.GetAnInstantiated(_dialoguePrefabs[name]);
+                var go = GameHiddenOptions.Instance.GetAnInstantiated(_dialoguePrefabs[name]);
                 go.SetActive(false);
-                _speechBublePool.Add(go.GetComponent<SpeechBuble>());
+                pool.Add(go.GetComponent<SpeechBuble>());
+                return go;
             }
         }
+        return null;
+    }
 
-        go.name = name;
+    void SetProperties(ref GameObject go, ref DialogBox dialogBox, bool hasChild = false)
+    {
+        go.name = dialogBox.DialogBoxType.ToString();
         go.transform.SetParent(DialogueBoxesParent, false);
         var rT = go.GetComponent<RectTransform>();
         rT.anchoredPosition3D = new Vector3(dialogBox.posX, dialogBox.posY, dialogBox.posZ);
@@ -148,10 +192,10 @@ public class DialogueController : MonoBehaviour
         rT.eulerAngles = new Vector3(dialogBox.rotationX, dialogBox.rotationY, dialogBox.rotationZ);
         rT.localScale = new Vector3(dialogBox.sizeX, dialogBox.sizeY, dialogBox.sizeZ);
 
-        var crT = rT.GetChild(0).GetComponent<RectTransform>();
-        crT.sizeDelta = new Vector2(dialogBox.childWidth, dialogBox.childHeight);
-
-        go.GetComponent<SpeechBuble>().InitLine(_currentLine.Sentences[_sentenceIndex], dialogBox.Index, SayLineFinished);
-        go.GetComponent<SpeechBuble>().SetActive();
+        if (hasChild)
+        {
+            var crT = rT.GetChild(0).GetComponent<RectTransform>();
+            crT.sizeDelta = new Vector2(dialogBox.childWidth, dialogBox.childHeight);
+        }
     }
 }

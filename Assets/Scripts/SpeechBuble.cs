@@ -12,6 +12,7 @@ public class SpeechBuble : MonoBehaviour
     public bool IsWhite;
     public float Slowdown;
     public bool IsInUse;
+    public bool IsConnector;
     public int Index;
     private SayLineFinished _onSayLineFinished;
     private int? _animationId;
@@ -55,6 +56,10 @@ public class SpeechBuble : MonoBehaviour
 
     public void SetActive()
     {
+        if (_image == null)
+        {
+            _image = GetComponent<Image>();
+        }
         _image.color = GameHiddenOptions.Instance.WhiteTransparentColor;
         gameObject.SetActive(true);
         if (_animationId.HasValue)
@@ -81,13 +86,18 @@ public class SpeechBuble : MonoBehaviour
             LeanTween.cancel(_animationId.Value);
             _animationId = null;
         }
+        if (_image == null)
+        {
+            _image = GetComponent<Image>();
+        }
         _animationId = LeanTween.alpha(
             _image.GetComponent<RectTransform>(),
             0f,
             GameHiddenOptions.Instance.TimeToLoadDialogueBoxes
         ).id;
         LeanTween.descr(_animationId.Value).setEase(LeanTweenType.easeInQuart);
-        LeanTween.descr(_animationId.Value).setOnComplete(() => {
+        LeanTween.descr(_animationId.Value).setOnComplete(() =>
+        {
             gameObject.SetActive(false);
         });
     }
