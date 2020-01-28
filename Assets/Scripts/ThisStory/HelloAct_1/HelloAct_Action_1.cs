@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Hellmade.Sound;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,7 +18,7 @@ public class HelloAct_Action_1 : MonoBehaviour, IAction
 
     void IAction.Do()
     {
-        PlayConversation();
+        Start_HelloAct_Action_1();
     }
 
     void IAction.ContinueAction()
@@ -28,11 +29,12 @@ public class HelloAct_Action_1 : MonoBehaviour, IAction
     #endregion
 
     public Image Panel;
-
     private List<Line> _lines;
 
-    void PlayConversation()
+    void Start_HelloAct_Action_1()
     {
+        MusicManager.Instance.PlayRequiredBackgroundMusic("CreepyMusic1", true, 10f);
+
         DialogueController.Instance.Show(_lines[0], true, OldManReply);
         DialogueController.Instance.SayLines();
     }
@@ -68,7 +70,7 @@ public class HelloAct_Action_1 : MonoBehaviour, IAction
                     new DialogBox() {
                         DialogBoxType = DialogBoxType.dbxs,
 posX = 562.6f, posY = 801.7f, posZ = 0f, width = 128.7f, height = 116f, sizeX = 1f, sizeY = 1f, sizeZ = 1f,
-anchorsMinX = 0f, anchorsMinY = 0f, anchorsMaxX = 0f, anchorsMaxY = 0f, pivotX = 0f, pivotY = 0f, 
+anchorsMinX = 0f, anchorsMinY = 0f, anchorsMaxX = 0f, anchorsMaxY = 0f, pivotX = 0f, pivotY = 0f,
 rotationX = 0f, rotationY = 0f, rotationZ = 0f , childWidth = 72.12f, childHeight = 50f
                     },
                     new DialogBox() {
