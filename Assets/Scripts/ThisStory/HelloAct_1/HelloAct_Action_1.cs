@@ -34,6 +34,7 @@ public class HelloAct_Action_1 : MonoBehaviour, IAction
     void Start_HelloAct_Action_1()
     {
         MusicManager.Instance.PlayRequiredBackgroundMusic("CreepyMusic1", true, 10f);
+        MusicManager.Instance.PlayRequiredAmbient("TrainAmbient", true);
 
         DialogueController.Instance.Show(_lines[0], true, OldManReply);
         DialogueController.Instance.SayLines();

@@ -14,7 +14,7 @@ public class MusicManager : MonoBehaviour
         InitializeSounds();
     }
 
-    private Dictionary<string, AudioClip> Sounds;
+    private Dictionary<string, MAudio> Sounds;
     public AudioClip CreepyMusic1;
     public AudioClip TrainAmbient1;
     public AudioClip TrainAmbient2;
@@ -22,12 +22,13 @@ public class MusicManager : MonoBehaviour
 
     void InitializeSounds()
     {
-        Sounds = new Dictionary<string, AudioClip>()
+        Sounds = new Dictionary<string, MAudio>()
         {
-            { "CreepyMusic1", CreepyMusic1 },
-            { "TrainAmbient1", TrainAmbient1 },
-            { "TrainAmbient2", TrainAmbient2 },
-            { "TrainAmbient3", TrainAmbient3 }
+            { "CreepyMusic1", new MAudio() { AudioClip = CreepyMusic1 } },
+            { "TrainAmbient", new MAudio() {
+                    AudioClips = new AudioClip[3] { TrainAmbient1, TrainAmbient2, TrainAmbient3 }
+                }
+            }
         };
     }
 
@@ -44,7 +45,7 @@ public class MusicManager : MonoBehaviour
             audio = EazySoundManager.GetAudio(_backgroundMusicId.Value);
             audio.Stop();
         }
-        _backgroundMusicId = EazySoundManager.PrepareMusic(Sounds[musicName], 0.7f, loop, false);
+        _backgroundMusicId = EazySoundManager.PrepareMusic(Sounds[musicName].AudioClip, 0.7f, loop, false);
         _backgroundMusic = musicName;
         audio = EazySoundManager.GetAudio(_backgroundMusicId.Value);
         audio.Play();
@@ -54,17 +55,52 @@ public class MusicManager : MonoBehaviour
         }
     }
 
-    public void PlayAmbient(string musicName, bool loop = true) {
-        Audio audio;
+    public void PlayAmbient(string musicName, bool loop = true)
+    {
+        ClearAmbientQueue();
+        _ambientMusic = musicName;
+        if (Sounds[_ambientMusic].AudioClip != null)
+        {
+            PlayAmbientAudio(Sounds[musicName], loop);
+        }
+        else
+        {
+            StartCoroutine(PlayAllAmbientAudio(Sounds[musicName], loop));
+        }
+    }
+
+    private void ClearAmbientQueue() {
         if (_ambientMusicId.HasValue)
         {
+            Audio audio = null;
             audio = EazySoundManager.GetAudio(_ambientMusicId.Value);
             audio.Stop();
+            audio = null;
         }
-        _ambientMusicId = EazySoundManager.PrepareMusic(Sounds[musicName], 0.2f, loop, false);
-        _ambientMusic = musicName;
-        audio = EazySoundManager.GetAudio(_ambientMusicId.Value);
+    }
+
+    private Audio PlayAmbientAudio(MAudio mAudio, bool loop, bool loadMany = false)
+    {
+        ClearAmbientQueue();
+        _ambientMusicId = EazySoundManager.PrepareMusic(
+            loadMany ? mAudio.AudioClips[mAudio.GetRandomIndex()] : mAudio.AudioClip,
+            0.2f,
+            loop,
+            false
+            );
+        Audio audio = EazySoundManager.GetAudio(_ambientMusicId.Value);
         audio.Play();
+        return audio;
+    }
+
+    private IEnumerator PlayAllAmbientAudio(MAudio mAudio, bool loop)
+    {
+        var audio = PlayAmbientAudio(mAudio, loop, true);
+        var time = audio.AudioSource.clip.length;
+
+        yield return new WaitForSeconds(time);
+
+        StartCoroutine(PlayAllAmbientAudio(mAudio, loop));
     }
 
     public void PlayRequiredBackgroundMusic(string musicName, bool loop = true, float? time = null)
@@ -85,5 +121,20 @@ public class MusicManager : MonoBehaviour
         }
 
         PlayAmbient(musicName, loop);
+    }
+}
+
+public class MAudio
+{
+    public AudioClip AudioClip;
+    public AudioClip[] AudioClips;
+
+    public int GetRandomIndex()
+    {
+        if (AudioClips != null && AudioClips.Length > 0)
+        {
+            return (int)Mathf.Ceil(Random.Range(0, AudioClips.Length));
+        }
+        return 0;
     }
 }

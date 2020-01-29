@@ -87,7 +87,7 @@ public class AuthorAction : MonoBehaviour, IAction
         LeanTween.cancel(_animationId.Value);
         _animationId = null;
 
-        MusicManager.Instance.PlayAmbient("TrainAmbient3");
+        MusicManager.Instance.PlayAmbient("TrainAmbient");
 
         _onFinish();
         // ActController.Instance.RequestContinue();
