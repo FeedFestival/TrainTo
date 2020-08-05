@@ -9,14 +9,14 @@ using TMPro;
 
 public class SayItService : MonoBehaviour
 {
-    private static SayItService _this;
+    private static SayItService _instance;
     public static SayItService Instance()
     {
-        return _this;
+        return _instance;
     }
     void Awake()
     {
-        _this = this;
+        _instance = this;
     }
 
     public bool doDebug;
@@ -28,8 +28,8 @@ public class SayItService : MonoBehaviour
     readonly char[] _delimeters = new char[3] { ' ', '.', ',' };
     private readonly Color32 _firstColorWhite = new Color32(81, 81, 81, 255);
     private readonly Color32 _firstColorBlack = new Color32(147, 147, 147, 147);
-    private string _hexColorWhite = "DBDBDB";
-    private string _hexColorBlack = "#343434";
+    // private string _hexColorWhite = "DBDBDB";
+    // private string _hexColorBlack = "#343434";
 
     public void SetLineOptions(TextMeshProUGUI dialogText, OnLineEnd onLineEnd)
     {

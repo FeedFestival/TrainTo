@@ -3,12 +3,12 @@ using System.Collections;
 
 public class TimeService : MonoBehaviour
 {
-    private static TimeService _TimeService;
-    public static TimeService Instance { get { return _TimeService; } }
+    private static TimeService _instance;
+    public static TimeService Instance { get { return _instance; } }
 
     private void Awake()
     {
-        _TimeService = this;
+        _instance = this;
         DontDestroyOnLoad(gameObject);
     }
 
@@ -115,5 +115,9 @@ public class TimeService : MonoBehaviour
         {
             _waitOneFrameIteration = false;
         }
+    }
+
+    public void ClearWait() {
+        _internalWait = null;
     }
 }

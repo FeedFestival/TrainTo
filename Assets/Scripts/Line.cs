@@ -39,7 +39,9 @@ public class DialogBox
     //-------------------------------------
     public float childWidth;
     public float childHeight;
-
+    public float childSizeX;
+    public float childSizeY;
+    public float fontSize;
 }
 
 public enum DialogBoxType

@@ -16,7 +16,7 @@ public class HelloAct_Action_1 : MonoBehaviour, IAction
         InitLines();
     }
 
-    void IAction.Do()
+    void IAction.Do(IAct act)
     {
         Start_HelloAct_Action_1();
     }

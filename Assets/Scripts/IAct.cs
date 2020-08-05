@@ -3,6 +3,12 @@ using UnityEngine;
 
 public delegate void FinishEvent();
 
+public enum TStyle
+{
+    None,
+    Overlay
+}
+
 public interface IAct
 {
     void InitAct(FinishEvent onFinish);
