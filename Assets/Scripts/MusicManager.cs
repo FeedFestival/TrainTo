@@ -11,7 +11,6 @@ public class MusicManager : MonoBehaviour
     void Awake()
     {
         _instance = this;
-        InitializeSounds();
     }
 
     private Dictionary<string, MAudio> Sounds;
@@ -20,7 +19,7 @@ public class MusicManager : MonoBehaviour
     public AudioClip TrainAmbient2;
     public AudioClip TrainAmbient3;
 
-    void InitializeSounds()
+    public void Init()
     {
         Sounds = new Dictionary<string, MAudio>()
         {

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,11 +13,6 @@ public class DialogueController : MonoBehaviour
     void Awake()
     {
         _instance = this;
-        foreach (Transform child in DialogueBoxesParent)
-        {
-            GameObject.Destroy(child.gameObject);
-        }
-        InitDialoguePrefabs();
     }
 
     public Transform DialogueBoxesParent;
@@ -40,8 +36,12 @@ public class DialogueController : MonoBehaviour
 
     //-------------------------------------
 
-    private void InitDialoguePrefabs()
+    public void Init()
     {
+        foreach (Transform child in DialogueBoxesParent)
+        {
+            GameObject.Destroy(child.gameObject);
+        }
         _dialoguePrefabs = new Dictionary<string, GameObject>()
         {
             { "dbs", dbs },
@@ -196,6 +196,8 @@ public class DialogueController : MonoBehaviour
         {
             var crT = rT.GetChild(0).GetComponent<RectTransform>();
             crT.sizeDelta = new Vector2(dialogBox.childWidth, dialogBox.childHeight);
+            crT.localScale = new Vector2(dialogBox.childSizeX, dialogBox.childSizeY);
+            crT.GetComponent<TextMeshProUGUI>().fontSize = dialogBox.fontSize;
         }
     }
 }

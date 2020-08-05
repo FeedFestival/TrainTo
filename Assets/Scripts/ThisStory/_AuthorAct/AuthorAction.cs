@@ -16,7 +16,7 @@ public class AuthorAction : MonoBehaviour, IAction
         _onFinish = onFinish;
     }
 
-    void IAction.Do()
+    void IAction.Do(IAct act)
     {
         PlayTestAnimation();
     }

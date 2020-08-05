@@ -10,6 +10,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets.Scripts.Utils
 {
@@ -188,6 +189,47 @@ namespace Assets.Scripts.Utils
             return new string(input.ToCharArray()
                 .Where(c => !Char.IsWhiteSpace(c))
                 .ToArray());
+        }
+
+        public static bool IsDigitsOnly(string str)
+        {
+            foreach (char c in str)
+            {
+                if (c < '0' || c > '9')
+                    return false;
+            }
+            return true;
+        }
+
+        public static System.Object GetPropValue(this System.Object obj, string name)
+        {
+            foreach (string part in name.Split('.'))
+            {
+                if (obj == null) { return null; }
+
+                System.Type type = obj.GetType();
+                PropertyInfo info = type.GetProperty(part);
+                if (info == null) { return null; }
+
+                obj = info.GetValue(obj, null);
+            }
+            return obj;
+        }
+
+        public static T GetPropValue<T>(this System.Object obj, string name)
+        {
+            System.Object retval = GetPropValue(obj, name);
+            if (retval == null) { return default(T); }
+
+            // throws InvalidCastException if types are incompatible
+            return (T)retval;
+        }
+
+        public static void SetImageAlpha(Image image, float value)
+        {
+            var tempColor = image.color;
+            tempColor.a = value;
+            image.color = tempColor;
         }
     }
 

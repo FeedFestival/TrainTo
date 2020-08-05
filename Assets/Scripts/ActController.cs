@@ -1,18 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
+using Assets.Scripts.Utils;
 
 public class ActController : MonoBehaviour
 {
     private static ActController _instance;
     public static ActController Instance { get { return _instance; } }
 
-    void Awake()
-    {
-        _instance = this;
-    }
-
-    public string[] ActDefs;
     public List<IAct> Acts;
 
     IAct CurrentAct;
@@ -24,53 +20,109 @@ public class ActController : MonoBehaviour
     public bool RequestedContinueAction = false;
     public GameObject TapRequestGo;
 
+    private TStyle _tStyle;
+
+    void Awake()
+    {
+        _instance = this;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        ActDefs = new string[2] {
-            "AuthorAct",
-            "HelloAct_1"
-        };
-        Acts = new List<IAct>();
+        MainStart();
+    }
+
+    /*
+    MAIN Class
+    ----------------------------------------------------
+    */
+    void MainStart()
+    {
         Overlay.gameObject.SetActive(true);
         Overlay.SetTransition(OverlayTransition.Transparent);
         TapRequestGo.SetActive(false);
 
+        PrefabManager.Instance().Init();
+        StartCoroutine(InitDependency1());
+    }
+
+    private IEnumerator InitDependency1()
+    {
+        yield return new WaitForSeconds(0.1f);
+        MusicManager.Instance.Init();
+        DialogueController.Instance.Init();
+        StartCoroutine(InitDependency2());
+    }
+
+    private IEnumerator InitDependency2()
+    {
+        yield return new WaitForSeconds(0.1f);
+        ActManager.Instance().Init();
         StartStory();
     }
 
     void StartStory()
     {
-        ActIndex = 0;
-        StartAct(StartAtAct);
+        Acts = new List<IAct>();
+
+        if (string.IsNullOrWhiteSpace(StartAtAct))
+        {
+            StartAtAct = ActManager.Instance().GetActDict().ElementAt(0).Key;
+            ActIndex = 0;
+        }
+        else
+        {
+            if (UsefullUtils.IsDigitsOnly(StartAtAct))
+            {
+                ActIndex = System.Convert.ToInt32(StartAtAct);
+                StartAtAct = ActManager.Instance().GetActDict().ElementAt(ActIndex).Key;
+            }
+            else
+            {
+                ActIndex = System.Array.IndexOf(ActManager.Instance().GetActDict().Keys.ToArray(), StartAtAct);
+            }
+        }
+        Debug.Log(ActIndex);
+        StartAct();
+    }
+
+    public void SetTransitionStyle(TStyle tStyle)
+    {
+        _tStyle = tStyle;
     }
 
     private void OnActEnd()
     {
         ActIndex++;
 
-        if (ActIndex >= ActDefs.Length)
+        if (ActIndex >= ActManager.Instance().GetActDict().Count)
         {
             return;
         }
 
-        Overlay.Transition(OverlayTransition.Complete, 1f, () => { StartAct(); });
+        if (_tStyle == TStyle.None)
+        {
+            StartAct();
+        }
+        else
+        {
+            Overlay.Transition(OverlayTransition.Complete, 1f, () => { StartAct(); });
+        }
+
+        _tStyle = TStyle.None;
     }
 
-    private void StartAct(string startAtAct = null)
+    private void StartAct()
     {
         if (CurrentAct != null)
         {
             CurrentAct.GameObject.SetActive(false);
         }
-        if (string.IsNullOrEmpty(startAtAct) == false)
-        {
-            CurrentAct = PrefabManager.Instance().GetActObject(startAtAct);
-        }
-        else
-        {
-            CurrentAct = PrefabManager.Instance().GetActObject(ActDefs[ActIndex]);
-        }
+
+        CurrentAct = ActManager.Instance().GetActObject(
+            ActManager.Instance().GetActDict().ElementAt(ActIndex).Key
+        );
 
         Acts.Add(CurrentAct);
         CurrentAct.InitAct(OnActEnd);
@@ -105,6 +157,11 @@ public class ActController : MonoBehaviour
         ContinueStory();
     }
 
+    public void SetStartAtAct(string actName)
+    {
+        StartAtAct = actName;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -114,3 +171,9 @@ public class ActController : MonoBehaviour
         }
     }
 }
+
+public enum SpeedSettings
+{
+    ProductionSpeed,
+    DevSpeed
+};
